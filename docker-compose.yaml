@@ -1,7 +1,7 @@
 version: "3.7"
 services:
-  next:
-    container_name: next
+  client:
+    container_name: client
     build:
       context: ./client
       dockerfile: Dockerfile.dev
@@ -14,3 +14,32 @@ services:
       - ./client:/app
     ports:
       - 80:80
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    environment:
+      PORT: 80
+      NODE_ENV: "development"
+      CHOKIDAR_USEPOLLING: "true"
+    env_file:
+      - ./api/.env
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    ports:
+      - 3000:80
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    container_name: mongo
+    command: [--auth]
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "root"
+      MONGO_INITDB_ROOT_PASSWORD: "root"
