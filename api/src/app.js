@@ -11,8 +11,6 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.use('')
-
 require("./api")(app);
 
 const port = process.env.PORT || 3001;
