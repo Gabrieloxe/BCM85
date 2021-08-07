@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { mongoURI } = require('./default.js');
+const { mongoURI } = require('./default');
 
 const connectDB = async () => {
   try {
