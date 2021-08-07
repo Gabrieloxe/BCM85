@@ -34,4 +34,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    await Beloved.findByIdAndDelete(req.params.id);
+    res.status(204).send({ status: true, message: "Beloved has been deleted" });
+  } catch (e) {
+    console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
+    res.status(400).send({ message: e.message, status: false });
+  }
+});
+
 module.exports = router;
