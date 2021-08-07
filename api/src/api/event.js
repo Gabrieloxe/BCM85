@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     if (!req.body) throw new Error("Body cannot be empty!");
-    const { title, description, start, end, date, allDay } = req.body;
-    const event = new Event({ title, description, start, end, date, allDay });
+    const { title, description, start, end, allDay } = req.body;
+    const event = new Event({ title, description, start, end, allDay });
     await event.save();
     res.send({ status: true, event });
   } catch (e) {
