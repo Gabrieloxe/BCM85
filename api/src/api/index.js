@@ -64,7 +64,7 @@ app.post('/api/events', (request, response) => {
   const event = new Event({
     name: body.content.name,
     description: body.content.description,
-    eventDate: body.content.eventDate,
+    eventDate: Date.parse(body.content.eventDate),
     date: new Date(),
   });
 

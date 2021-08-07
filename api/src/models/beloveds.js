@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 const db = require('../api/config/db.js');
 
-console.log('connecting to', url);
-
-db.connnectDB();
 
 const belovedSchema = new mongoose.Schema({
   name: String,
