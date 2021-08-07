@@ -1,7 +1,7 @@
-const router = require("express").Router();
-const Beloved = require("../models/beloveds");
+const router = require('express').Router();
+const Beloved = require('../models/beloveds');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const beloveds = await Beloved.find({});
     res.send({ status: true, beloveds });
@@ -11,9 +11,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    if (!req.body) throw new Error("Body cannot be empty!");
+    if (!req.body) throw new Error('Body cannot be empty!');
     const { name } = req.body;
     const beloved = new Beloved({ name });
     await beloved.save();
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const beloved = await Beloved.findById(req.params.id);
     res.send({ status: true, beloved });
@@ -34,10 +34,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     await Beloved.findByIdAndDelete(req.params.id);
-    res.status(204).send({ status: true, message: "Beloved has been deleted" });
+    res.status(204).send({ status: true, message: 'Beloved has been deleted' });
   } catch (e) {
     console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
     res.status(400).send({ message: e.message, status: false });
