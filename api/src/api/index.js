@@ -2,8 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  res.json({
+router.get("/", async (request, response) => {
+  response.json({
     message: "API - 👋🌎🌍🌏",
   });
 });
