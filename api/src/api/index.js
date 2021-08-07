@@ -44,6 +44,13 @@ app.get('/api/beloveds/:id', (request, response) => {
   });
 });
 
+app.delete('/api/beloveds/:id', (request, response) => {
+  const id = request.params.id;
+  Beloved.findByIdAndDelete(id).then(query =>{
+    response.status(204).end();
+  })
+});
+
 // EVENT ROUTES
 
 router.get('/api/events', (request, response) =>{
@@ -78,6 +85,13 @@ app.get('/api/events/:id', (request, response) => {
   Event.findById(id).then(event => {
     response.json(event);
   });
+});
+
+app.delete('/api/events/:id', (request, response) => {
+  const id = request.params.id;
+  Event.findByIdAndDelete(id).then(query =>{
+    response.status(204).end();
+  })
 });
 
 module.exports = router;
