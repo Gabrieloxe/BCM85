@@ -1,21 +1,8 @@
-const mongoose = require('mongoose');
-const db = require('../api/config/db.js');
+const mongoose = require("mongoose");
 
-console.log('connecting to', url);
+const belovedSchema = new mongoose.Schema(
+  { name: { type: String, required: true } },
+  { timestamps: true },
+);
 
-db.connnectDB();
-
-const belovedSchema = new mongoose.Schema({
-  name: String,
-  date: Date,
-});
-
-belovedSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
-});
-
-module.exports = mongoose.model('Beloved', belovedSchema);
+module.exports = mongoose.model("Beloved", belovedSchema);

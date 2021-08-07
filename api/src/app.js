@@ -21,7 +21,7 @@ app.get("/", async (req, res) =>
   res.status(200).send({ message: "Express api ready", status: true }),
 );
 
-app.use("/api/v1", api);
+require("./api")(app);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server started and istening on ${port}`));

@@ -1,23 +1,18 @@
-const mongoose = require('mongoose');
-const db = require('../api/config/db.js');
+const mongoose = require("mongoose");
 
-console.log('connecting to', url);
-
-db.connnectDB();
-
-const eventSchema = new mongoose.Schema({
-  eventName: String,
-  eventDescription:String,
-  eventDate:Date,
-  date: Date,
-});
-
-eventSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+const eventSchema = new mongoose.Schema(
+  {
+    eventName: {
+      type: String,
+      required: true,
+    },
+    eventDescription: String,
+    eventDate: {
+      type: Date,
+      required: true,
+    },
   },
-});
+  { timestamps: true },
+);
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model("Event", eventSchema);
