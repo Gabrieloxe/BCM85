@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { mongoURI } = require("./default.js");
+const mongoose = require('mongoose');
+const { mongoURI } = require('./default.js');
 
 const connectDB = async () => {
   try {
@@ -8,10 +8,10 @@ const connectDB = async () => {
       useCreateIndex: true,
       useUnifiedTopology: true,
     });
-    console.log("MongoDB Connected...");
+    console.log('MongoDB Connected...');
   } catch (err) {
     console.error(err.message);
-    console.log("MongoDB Connection Failed...");
+    console.log('MongoDB Connection Failed...');
     // Exit process with failure
     process.exit(1);
   }

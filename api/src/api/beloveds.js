@@ -1,7 +1,7 @@
-const router = require("express").Router();
-const Beloved = require("../models/beloveds");
+const router = require('express').Router();
+const Beloved = require('../models/beloveds');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const beloveds = await Beloved.find({});
     res.send({ status: true, beloveds });
@@ -11,9 +11,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    if (!req.body) throw new Error("Body cannot be empty!");
+    if (!req.body) throw new Error('Body cannot be empty!');
     const { name } = req.body;
     const beloved = new Beloved({ name });
     await beloved.save();
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const beloved = await Beloved.findById(req.params.id);
     res.send({ status: true, beloved });
@@ -34,4 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
+/*
+*/
 module.exports = router;

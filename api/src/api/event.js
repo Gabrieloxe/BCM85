@@ -1,7 +1,7 @@
-const router = require("express").Router();
-const Event = require("../models/events");
+const router = require('express').Router();
+const Event = require('../models/events');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const events = await Event.find({});
     res.send({ status: true, events });
@@ -11,11 +11,15 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
-    if (!req.body) throw new Error("Body cannot be empty!");
-    const { eventName, description, eventDate, date } = req.body;
-    const event = new Event({ eventName, description, eventDate, date });
+    if (!req.body) throw new Error('Body cannot be empty!');
+    const {
+      eventName, description, eventDate, date
+    } = req.body;
+    const event = new Event({
+      eventName, description, eventDate, date
+    });
     await event.save();
     res.send({ status: true, event });
   } catch (e) {
@@ -24,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     res.send({ status: true, event });

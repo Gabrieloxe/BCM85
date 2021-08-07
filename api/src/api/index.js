@@ -1,6 +1,6 @@
 const missingRoute = require("../middlewares/404");
+
 module.exports = (app) => {
-  app.use(missingRoute);
   app.get("/healthz", async (req, res) =>
     res.status(200).send({ message: "Health check", status: true }),
   );
@@ -12,4 +12,5 @@ module.exports = (app) => {
   app.get("/api", (req, res) =>
     res.send({ message: "Express api health check!" }),
   );
+  app.use(missingRoute);
 };
