@@ -9,6 +9,7 @@ services:
       PORT: 80
       NODE_ENV: "development"
       CHOKIDAR_USEPOLLING: "true"
+      TZ: "Asia/Singapore"
     volumes:
       - /app/node_modules
       - ./client:/app
@@ -23,6 +24,7 @@ services:
       PORT: 80
       NODE_ENV: "development"
       CHOKIDAR_USEPOLLING: "true"
+      TZ: "Asia/Singapore"
     env_file:
       - ./api/.env
     volumes:

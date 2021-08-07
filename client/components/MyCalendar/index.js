@@ -13,18 +13,19 @@ const events = [
     title: "Sunday Service",
     start: new Date(2021, 7, 9, 0, 0, 0),
     end: new Date(2021, 7, 9, 5, 30, 0),
-  },{
+  },
+  {
     id: 0,
     title: "Sunday Service",
     start: new Date(2021, 7, 8, 0, 0, 0),
     end: new Date(2021, 7, 8, 5, 30, 0),
-  }
+  },
 ];
 const MyCalendar = () => {
   console.log(events);
   return (
     <div>
-      <Calendar localizer={localizer} events={events} startAccessor='start' endAccessor='end' defaultView='week' />
+      <Calendar localizer={localizer} events={events} startAccessor='start' endAccessor='end' defaultView='week' defaultDate={new Date()} />
     </div>
   );
 };
