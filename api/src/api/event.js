@@ -18,7 +18,11 @@ router.post('/', async (req, res) => {
       title, description, start, end, allDay
     } = req.body;
     const event = new Event({
-      title, description, start, end, allDay
+      title,
+      description,
+      start,
+      end,
+      allDay,
     });
     await event.save();
     res.send({ status: true, event });
@@ -48,17 +52,25 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id', async(req,res) =>{
-  try{
-    const { title, description, start, end, allDay } = req.body;
-    const event = new Event({ title, description, start, end, allDay });
-    const options = {new: true}
-    const update = await Model.findOneAndReplace({ _id: id }, event, options);
+router.put('/:id', async (req, res) => {
+  try {
+    const {
+      title, description, start, end, allDay
+    } = req.body;
+    const event = new Event({
+      title, description, start, end, allDay
+    });
+    const options = { new: true };
+    const update = await Event.findOneAndReplace(
+      { _id: req.params.id },
+      event,
+      options,
+    );
     res.send({ status: true, update, message: 'Event has been updated' });
   } catch (e) {
     console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
     res.status(400).send({ message: e.message, status: false });
   }
-})
+});
 
 module.exports = router;

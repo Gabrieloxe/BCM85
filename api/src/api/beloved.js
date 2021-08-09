@@ -44,12 +44,12 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id', async(req,res) =>{
-  try{
+router.put('/:id', async (req, res) => {
+  try {
     const { name } = req.body;
     const beloved = new Beloved({ name });
-    const options = {new: true}
-    const update = await Model.findOneAndReplace({ _id: id }, beloved, options);
+    const options = { new: true };
+    const update = await Beloved.findOneAndReplace({ _id: req.params.id }, beloved, options);
     res.send({ status: true, update, message: 'Beloved has been updated' });
   } catch (e) {
     console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
