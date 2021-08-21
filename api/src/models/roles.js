@@ -6,6 +6,7 @@ const roleSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    viewAll: Boolean,
     description: String,
   },
   { timestamps: true },

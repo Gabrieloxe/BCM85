@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Song = require('../models/songs');
-const { route } = require('./beloved');
 
 router.get('/', async (req, res) => {
   try {
@@ -33,10 +32,31 @@ router.post('/', async (req, res) => {
   }
 });
 
-route.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const song = await Song.findById(req.params.id);
     res.send({ status: true, song });
+  } catch (e) {
+    console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
+    res.status(400).send({ message: e.message, status: false });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const {
+      title, url, artist, lyrics, albumArt
+    } = req.body;
+    const song = new Song({
+      title, url, artist, lyrics, albumArt,
+    });
+    const options = { new: true };
+    const update = await Song.findOneAndReplace(
+      { _id: req.params.id },
+      song,
+      options,
+    );
+    res.send({ status: true, update, message: 'Event has been updated' });
   } catch (e) {
     console.log(`Error in ${req.method} route ${req.baseUrl}: ${e.message}`);
     res.status(400).send({ message: e.message, status: false });
